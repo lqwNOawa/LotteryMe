@@ -35,6 +35,15 @@ public class Data extends YamlConfiguration
                 plugin.getServer().getPluginManager().disablePlugin(plugin);
             }
         }
+
+        load();
+
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, this::save,
+                1000, 1000);
+    }
+
+    public void load()
+    {
         try
         {
             load(dataFile);
@@ -45,9 +54,6 @@ public class Data extends YamlConfiguration
             plugin.getLogger().warning("无法加载数据文件");
             plugin.getServer().getPluginManager().disablePlugin(plugin);
         }
-
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, this::save,
-                1000, 1000);
 
         List<Map<?, ?>> refreshed = getMapList("Signs");
         getMapList("Signs").forEach(map ->

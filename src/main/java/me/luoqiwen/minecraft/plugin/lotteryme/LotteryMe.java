@@ -1,5 +1,6 @@
 package me.luoqiwen.minecraft.plugin.lotteryme;
 
+import me.luoqiwen.minecraft.plugin.lotteryme.command.LotteryMeCmdHandler;
 import me.luoqiwen.minecraft.plugin.lotteryme.listeners.DispenserPlaceListener;
 import me.luoqiwen.minecraft.plugin.lotteryme.listeners.SignInteractListener;
 import me.luoqiwen.minecraft.plugin.lotteryme.listeners.SignPlaceListener;
@@ -31,7 +32,7 @@ public final class LotteryMe extends JavaPlugin
         getServer().getPluginManager().registerEvents(new SignPlaceListener(), this);
         getServer().getPluginManager().registerEvents(new SignInteractListener(), this);
 
-
+        getCommand("lotteryme").setExecutor(new LotteryMeCmdHandler());
     }
 
     @Override
@@ -40,6 +41,7 @@ public final class LotteryMe extends JavaPlugin
         // Plugin shutdown logic
 
         HandlerList.unregisterAll(this);
+        getServer().getScheduler().cancelTasks(this);
         data.save();
     }
 

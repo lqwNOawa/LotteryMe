@@ -4,3 +4,17 @@ main: me.luoqiwen.minecraft.plugin.lotteryme.LotteryMe
 api-version: 1.8
 authors: [ luoqiwen ]
 description: a lottery plugin
+commands:
+  lotteryme:
+    aliases:
+      - lm
+      - lottery
+    permission-message: §4你没有执行此操作的权限!
+    usage: §6请使用 §a/lm <参数>
+permissions:
+  lottery:
+    description: main permission tree
+    children:
+      reload:
+        default: op
+        description: 重载权限

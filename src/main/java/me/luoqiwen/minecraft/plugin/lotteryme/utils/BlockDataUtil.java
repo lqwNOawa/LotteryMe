@@ -1,6 +1,7 @@
 package me.luoqiwen.minecraft.plugin.lotteryme.utils;
 
 import me.luoqiwen.minecraft.plugin.lotteryme.LotteryMe;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Dispenser;
@@ -13,6 +14,8 @@ public class BlockDataUtil
 
     public static boolean isLotterySign(Block sign)
     {
-        return sign.getState() instanceof Sign && sign.getRelative(BlockFace.DOWN) instanceof Dispenser;
+        return sign.getType().equals(Material.SIGN_POST)
+                && sign.getRelative(BlockFace.DOWN) instanceof Dispenser
+                && ((Sign)sign.getState()).getLine(0).equals(plugin.getConfig().getString("symbol"));
     }
 }

@@ -18,6 +18,7 @@ public class SignInteractListener implements Listener
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)
                 && BlockDataUtil.isLotterySign(e.getClickedBlock()))
         {
+            plugin.getLogger().info("Sign Interacted");
             LotteryUtils.launch(e.getClickedBlock(), e.getPlayer());
         }
     }

@@ -2,6 +2,8 @@ package me.luoqiwen.minecraft.plugin.lotteryme.listeners;
 
 import me.luoqiwen.minecraft.plugin.lotteryme.LotteryMe;
 import me.luoqiwen.minecraft.plugin.lotteryme.utils.BlockDataUtil;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -20,7 +22,9 @@ public class SignPlaceListener implements Listener
             {
                 e.getPlayer().sendMessage(plugin.getConfig().getString("succeed")
                         .replaceAll("&", "§"));
-                e.setLine(1, "§6§l⭐ §c§l§n" + plugin.getConfig().getString("symbol") + "§6§l⭐");
+                Sign state = (Sign)e.getBlock().getState();
+                state.setLine(0, BlockDataUtil.getColoredSymbol());
+                state.update();
             }
         });
     }

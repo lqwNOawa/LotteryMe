@@ -16,6 +16,11 @@ public class BlockDataUtil
     {
         return sign.getType().equals(Material.SIGN_POST)
                 && sign.getRelative(BlockFace.DOWN).getState() instanceof Dispenser
-                && ((Sign)sign.getState()).getLine(0).equals(plugin.getConfig().getString("symbol"));
+                && ((Sign)sign.getState()).getLine(0).equals(getColoredSymbol());
+    }
+
+    public static String getColoredSymbol()
+    {
+        return "§d§l⭐ §6§l§n" + plugin.getConfig().getString("symbol") + " §d§l⭐";
     }
 }

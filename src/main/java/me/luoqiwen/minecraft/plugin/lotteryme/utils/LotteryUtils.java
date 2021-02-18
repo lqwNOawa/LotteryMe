@@ -2,7 +2,9 @@ package me.luoqiwen.minecraft.plugin.lotteryme.utils;
 ;
 import me.luoqiwen.minecraft.plugin.lotteryme.LotteryMe;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Dispenser;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -15,19 +17,23 @@ public class LotteryUtils
 {
     private LotteryUtils() {}
 
-    private final LotteryMe plugin = LotteryMe.INSTANCE;
+    private static final LotteryMe plugin = LotteryMe.INSTANCE;
 
-    public static void launch(Block block)
+    public static void launch(Block sign, Player player)
     {
-        if (block.getState() instanceof Dispenser)
+        if (BlockDataUtil.isLotterySign(sign))
         {
-            Dispenser dispenser = (Dispenser) block.getState();
+            Block down = sign.getRelative(BlockFace.DOWN);
+            Dispenser dispenser = (Dispenser) (down.getState());
             Inventory inventory = dispenser.getInventory();
-            if (dispenser.isPlaced() && inventory.firstEmpty() < 8)
+            if (inventory.firstEmpty() == 0)
+                player.sendMessage(plugin.getConfig().getString("empty")
+                        .replaceAll("&", "§"));
+            else if (dispenser.isPlaced())
             {
                 ItemStack result;
                 while ((result = inventory.getItem(new Random().nextInt(9))) == null) {}
-                DispenseListener dispenseListener = new DispenseListener(block, result);
+                DispenseListener dispenseListener = new DispenseListener(down, result);
 
                 dispenser.dispense();
             }

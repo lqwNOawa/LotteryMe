@@ -13,13 +13,15 @@ public class LotteryMeCmdHandler implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings)
     {
-        if (strings[0].equalsIgnoreCase("reload") &&
+        if (strings.length == 1 && strings[0].equalsIgnoreCase("reload") &&
                 (commandSender instanceof ConsoleCommandSender || commandSender.hasPermission("lotteryme.reload")))
         {
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, ()->
             {
-                plugin.getData().load();
+                plugin.reloadConfig();
+                commandSender.sendMessage("LotteryMe重载成功");
             });
+            return true;
         }
         return false;
     }

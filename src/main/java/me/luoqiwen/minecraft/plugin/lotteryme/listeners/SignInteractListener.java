@@ -15,9 +15,10 @@ public class SignInteractListener implements Listener
     @EventHandler(ignoreCancelled = true)
     public void onInteract(PlayerInteractEvent e)
     {
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && BlockDataUtil.isLotterySign(e.getClickedBlock()))
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)
+                && BlockDataUtil.isLotterySign(e.getClickedBlock()))
         {
-            LotteryUtils.launch(BlockDataUtil.getDispenser(e.getClickedBlock()));
+            LotteryUtils.launch(e.getClickedBlock(), e.getPlayer());
         }
     }
 }

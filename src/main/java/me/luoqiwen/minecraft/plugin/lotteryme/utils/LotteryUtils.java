@@ -26,7 +26,7 @@ public class LotteryUtils
             Block down = sign.getRelative(BlockFace.DOWN);
             Dispenser dispenser = (Dispenser) (down.getState());
             Inventory inventory = dispenser.getInventory();
-            if (inventory.firstEmpty() == 0)
+            if (inventory.getContents().length == 0)
                 player.sendMessage(plugin.getConfig().getString("empty")
                         .replaceAll("&", "§"));
             else if (dispenser.isPlaced())

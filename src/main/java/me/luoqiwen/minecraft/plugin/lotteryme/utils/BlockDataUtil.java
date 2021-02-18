@@ -15,7 +15,7 @@ public class BlockDataUtil
     public static boolean isLotterySign(Block sign)
     {
         return sign.getType().equals(Material.SIGN_POST)
-                && sign.getRelative(BlockFace.DOWN) instanceof Dispenser
+                && sign.getRelative(BlockFace.DOWN).getState() instanceof Dispenser
                 && ((Sign)sign.getState()).getLine(0).equals(plugin.getConfig().getString("symbol"));
     }
 }

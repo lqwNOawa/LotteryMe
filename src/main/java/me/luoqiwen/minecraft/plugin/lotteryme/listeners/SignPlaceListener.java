@@ -2,11 +2,12 @@ package me.luoqiwen.minecraft.plugin.lotteryme.listeners;
 
 import me.luoqiwen.minecraft.plugin.lotteryme.LotteryMe;
 import me.luoqiwen.minecraft.plugin.lotteryme.utils.BlockDataUtil;
-import org.bukkit.block.BlockState;
+import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.Dispenser;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
 
 public class SignPlaceListener implements Listener
@@ -18,7 +19,9 @@ public class SignPlaceListener implements Listener
     {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, ()->
         {
-            if (BlockDataUtil.isLotterySign(e.getBlock()))
+            if (e.getBlock().getType().equals(Material.SIGN_POST)
+                    && e.getBlock().getRelative(BlockFace.DOWN).getState() instanceof Dispenser
+                    && ((Sign)e.getBlock().getState()).getLine(0).equals(plugin.getConfig().getString("symbol")))
             {
                 e.getPlayer().sendMessage(plugin.getConfig().getString("succeed")
                         .replaceAll("&", "§"));

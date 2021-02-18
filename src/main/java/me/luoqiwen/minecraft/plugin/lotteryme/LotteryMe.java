@@ -3,6 +3,7 @@ package me.luoqiwen.minecraft.plugin.lotteryme;
 import me.luoqiwen.minecraft.plugin.lotteryme.command.LotteryMeCmdHandler;
 import me.luoqiwen.minecraft.plugin.lotteryme.listeners.DispenserPlaceListener;
 import me.luoqiwen.minecraft.plugin.lotteryme.listeners.SignInteractListener;
+import me.luoqiwen.minecraft.plugin.lotteryme.listeners.SignPlaceListener;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
@@ -24,6 +25,7 @@ public final class LotteryMe extends JavaPlugin
             saveResource("config.yml", true);
         }
 
+        getServer().getPluginManager().registerEvents(new SignPlaceListener(), this);
         getServer().getPluginManager().registerEvents(new DispenserPlaceListener(), this);
         getServer().getPluginManager().registerEvents(new SignInteractListener(), this);
 

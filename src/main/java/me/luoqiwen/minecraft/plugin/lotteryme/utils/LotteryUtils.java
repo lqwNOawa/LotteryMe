@@ -26,7 +26,7 @@ public class LotteryUtils
             Block down = sign.getRelative(BlockFace.DOWN);
             Dispenser dispenser = (Dispenser) (down.getState());
             Inventory inventory = dispenser.getInventory();
-            if (inventory.getContents().length == 0)
+            if (isEmpty(inventory))
                 player.sendMessage(plugin.getConfig().getString("empty")
                         .replaceAll("&", "§"));
             else if (dispenser.isPlaced())
@@ -38,6 +38,17 @@ public class LotteryUtils
                 dispenser.dispense();
             }
         }
+    }
+
+    private static boolean isEmpty(Inventory inventory)
+    {
+        boolean empty = true;
+        for (int i = 0; i < 9; i++)
+        {
+            if (inventory.getItem(i) != null)
+                empty = false;
+        }
+        return empty;
     }
 }
 

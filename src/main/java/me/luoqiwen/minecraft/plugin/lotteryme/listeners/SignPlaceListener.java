@@ -27,6 +27,7 @@ public class SignPlaceListener implements Listener
                         .replaceAll("&", "§"));
                 Sign state = (Sign)e.getBlock().getState();
                 state.setLine(0, BlockDataUtil.getColoredSymbol());
+                state.setLine(1, "§a创建者: §b" + e.getPlayer().getName());
                 state.update();
             }
         });

@@ -21,6 +21,6 @@ public class BlockDataUtil
 
     public static String getColoredSymbol()
     {
-        return "§d§l⭐ §6§l§n" + plugin.getConfig().getString("symbol") + " §d§l⭐";
+        return "§d§l⭐ §4§l§n" + plugin.getConfig().getString("symbol") + " §d§l⭐";
     }
 }
